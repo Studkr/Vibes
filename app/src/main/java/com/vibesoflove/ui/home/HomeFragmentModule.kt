@@ -12,7 +12,6 @@ interface HomeFragmentModule {
     @ContributesAndroidInjector(modules = [
         HomeFragmentViewModelModule::class
     ])
-
     fun inject(): HomeFragment
 }
 

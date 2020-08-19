@@ -3,6 +3,7 @@ package com.vibesoflove.ui.main_activity
 import androidx.lifecycle.ViewModel
 import com.flipsidegroup.nmt.di.viewmodel.ViewModelKey
 import com.vibesoflove.ui.MainActivity
+import com.vibesoflove.ui.home.HomeFragmentModule
 import com.vibesoflove.ui.home.HomeFragmentViewModelModule
 import dagger.Binds
 import dagger.Module
@@ -13,7 +14,7 @@ import dagger.multibindings.IntoMap
 interface MainActivityModule {
     @ContributesAndroidInjector(modules = [
         MainActivityViewModelModule::class,
-        HomeFragmentViewModelModule::class
+        HomeFragmentModule::class
     ])
     fun activity(): MainActivity
 }
