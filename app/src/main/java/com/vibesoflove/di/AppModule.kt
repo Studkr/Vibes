@@ -2,6 +2,8 @@ package com.vibesoflove.di
 
 import android.app.Application
 import android.content.Context
+import com.vibesoflove.ui.loading.SplashActivityModule
+import com.vibesoflove.ui.main_activity.MainActivityModule
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +14,8 @@ import javax.inject.Singleton
 @Module(
         includes = [
             CoroutineContextModule::class,
-
+            SplashActivityModule::class,
+            MainActivityModule::class
         ]
 )
 class AppModule(val app: Application) {
