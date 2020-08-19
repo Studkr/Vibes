@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "2913704333",
+    "firebase_url": "https://vibes-5b6e3.firebaseio.com",
+    "project_id": "vibes-5b6e3",
+    "storage_bucket": "vibes-5b6e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2913704333:android:a789ee81fb8dd1911385c4",
+        "android_client_info": {
+          "package_name": "com.vibesoflove"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2913704333-hfnd9qgfqnul1lul07t3cpqhbcf9c3gn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vibesoflove",
+            "certificate_hash": "ca89f0b9d94e7910e2d05510e0d37a32d31890cb"
+          }
+        },
+        {
+          "client_id": "2913704333-7m4ead9i2lh09d2u0dm704rp20pf5gtj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTvliX6-AnhZS_4d-F3wARvQhbuebPRU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2913704333-7m4ead9i2lh09d2u0dm704rp20pf5gtj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

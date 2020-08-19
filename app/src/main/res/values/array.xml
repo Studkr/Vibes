@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="rooms">
+        <item>Personal</item>
+        <item>Meditation</item>
+        <item>Harmony</item>
+        <item>Night City</item>
+        <item>Ocean</item>
+        <item>Rain</item>
+        <item>Romantic</item>
+        <item>Starfall</item>
+        <item>Immersion</item>
+        <item>Bonfire</item>
+        <item>Aquarium</item>
+    </string-array>
+    <string-array name="about">
+    <item></item>
+    <item>Beyond the mind</item>
+    <item>Eastern tale</item>
+    <item>Sleeplessness</item>
+    <item>Сarefree summer</item>
+    <item>Forest charm</item>
+    <item>By drawing dreams</item>
+    <item>Make a wish</item>
+    <item>Depths of mind</item>
+    <item>Celtic motives</item>
+    <item>Solitude time</item>
+    </string-array>
+
+</resources>
