@@ -1,25 +1,24 @@
-package com.vibesoflove.ui.home.deatils
+package com.vibesoflove.ui.home.category_details
 
 import androidx.lifecycle.ViewModel
 import com.flipsidegroup.nmt.di.viewmodel.ViewModelKey
-import com.vibesoflove.ui.home.category_details.FragmentDetailsCategoryModule
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 
 @Module
-interface FragmentCategoryModule {
+interface FragmentDetailsCategoryModule {
     @ContributesAndroidInjector(modules = [
         FragmentCategoryViewModelModule::class
     ])
-    fun inject(): FragmentCategory
+    fun inject():FragmentDetailsCategory
 }
 
 @Module
-interface FragmentCategoryViewModelModule {
+interface FragmentCategoryViewModelModule{
     @Binds
     @IntoMap
-    @ViewModelKey(FragmentCategoryViewModel::class)
-    fun viewModel(viewModel: FragmentCategoryViewModel): ViewModel
+    @ViewModelKey(FragmentDetailsCategoryViewModel::class)
+    fun viewModel (viewModel: FragmentDetailsCategoryViewModel):ViewModel
 }

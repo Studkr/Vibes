@@ -5,7 +5,9 @@ import com.flipsidegroup.nmt.di.viewmodel.ViewModelKey
 import com.vibesoflove.ui.MainActivity
 import com.vibesoflove.ui.home.HomeFragmentModule
 import com.vibesoflove.ui.home.HomeFragmentViewModelModule
+import com.vibesoflove.ui.home.category_details.FragmentDetailsCategoryModule
 import com.vibesoflove.ui.home.deatils.FragmentCategoryModule
+import com.vibesoflove.ui.home.video.FragmentVIdeoPlayerModule
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -16,7 +18,9 @@ interface MainActivityModule {
     @ContributesAndroidInjector(modules = [
         MainActivityViewModelModule::class,
         HomeFragmentModule::class,
-        FragmentCategoryModule::class
+        FragmentCategoryModule::class,
+        FragmentDetailsCategoryModule::class,
+        FragmentVIdeoPlayerModule::class
     ])
     fun activity(): MainActivity
 }

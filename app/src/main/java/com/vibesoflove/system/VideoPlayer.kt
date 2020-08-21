@@ -14,6 +14,7 @@ import com.google.android.exoplayer2.Player.STATE_IDLE
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
 import com.google.android.exoplayer2.extractor.ts.AdtsExtractor
+import com.google.android.exoplayer2.extractor.ts.DefaultTsPayloadReaderFactory.FLAG_ALLOW_NON_IDR_KEYFRAMES
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DataSpec
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
@@ -84,6 +85,7 @@ class VideoPlayer @Inject constructor(
         val dataSourceFactory = DefaultDataSourceFactory(
                 context, Util.getUserAgent(context, context.getString(R.string.app_name))
         )
+       // val defFactory = DefaultExtractorsFactory().setAdtsExtractorFlags(AdtsExtractor.FLAG_ALLOW_NON_IDR_KEYFRAMES)
         return ProgressiveMediaSource.Factory(dataSourceFactory)
                 .createMediaSource(mUri)
     }

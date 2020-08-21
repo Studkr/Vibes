@@ -5,7 +5,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class CategoryModel(
-        val name:String
+        val name:String,
+        val category:String
 ):Parcelable{
-    constructor():this("")
+    constructor():this("","")
 }

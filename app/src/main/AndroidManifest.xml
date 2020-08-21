@@ -41,7 +41,6 @@
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen" />
 
         <meta-data

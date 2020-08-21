@@ -1,6 +1,8 @@
 package com.vibesoflove.model
 
+import android.os.Parcelable
 import com.fasterxml.jackson.annotation.JsonProperty
+import kotlinx.android.parcel.Parcelize
 
 data class VideoModel (
         val page: Long,
@@ -11,6 +13,7 @@ data class VideoModel (
         val url: String,
         val videos: List<Video>
 )
+
 
 data class Video (
         @JsonProperty("full_res")
@@ -28,13 +31,13 @@ data class Video (
         @JsonProperty("video_pictures")
         val videoPictures: List<VideoPicture>
 )
-
+@Parcelize
 data class User (
         val id: Long,
         val name: String,
         val url: String
-)
-
+):Parcelable
+@Parcelize
 data class VideoFile (
         val id: Long,
         val quality: Quality,
@@ -43,7 +46,7 @@ data class VideoFile (
         val width: Long? = null,
         val height: Long? = null,
         val link: String
-)
+):Parcelable
 
 enum class FileType {
     @JsonProperty("video/mp4")
@@ -56,11 +59,13 @@ enum class Quality {
     @JsonProperty("hls")
     HLS,
     @JsonProperty("sd")
-    SD
+    SD,
+    @JsonProperty("mobile")
+    MOBILE
 }
-
+@Parcelize
 data class VideoPicture (
         val id: Long,
         val picture: String,
         val nr: Long
-)
+):Parcelable

@@ -5,6 +5,29 @@
     android:id="@+id/main_navigation.xml"
     app:startDestination="@id/homeFragment">
 
+    <action
+        android:id="@+id/toCategoryFragment"
+        app:destination="@+id/fragmentCategory"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+
+    <action
+        android:id="@+id/toDetailsFragment"
+        app:destination="@+id/fragmentDetailsCategory"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+    <action
+        android:id="@+id/toVideoPlayer"
+        app:destination="@+id/fragmentVideoPlayer"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.vibesoflove.ui.home.HomeFragment"
@@ -18,13 +41,16 @@
         android:label="fragment_category_fragment"
         tools:layout="@layout/fragment_category_fragment" />
 
-    <action
-        android:id="@+id/toCategoryFragment"
-        app:destination="@+id/fragmentCategory"
-        app:enterAnim="@anim/fade_in"
-        app:exitAnim="@anim/fade_out"
-        app:popEnterAnim="@anim/fade_in"
-        app:popExitAnim="@anim/fade_out" />
+    <fragment
+        android:id="@+id/fragmentDetailsCategory"
+        android:name="com.vibesoflove.ui.home.category_details.FragmentDetailsCategory"
+        android:label="fragment_details_category_fragment"
+        tools:layout="@layout/fragment_details_category_fragment" />
+    <fragment
+        android:id="@+id/fragmentVideoPlayer"
+        android:name="com.vibesoflove.ui.home.video.FragmentVideoPlayer"
+        android:label="fragment_video_player_fragment"
+        tools:layout="@layout/fragment_video_player_fragment" />
 
 
 </navigation>
