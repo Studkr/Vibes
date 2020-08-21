@@ -13,6 +13,7 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 
 import com.vibesoflove.R
+import com.vibesoflove.model.CategoryModel
 import com.vibesoflove.model.ContentModel
 
 
@@ -22,7 +23,7 @@ import com.vibesoflove.model.ContentModel
 abstract class PersonModel : EpoxyModelWithHolder<PersonModel.Holder>() {
 
     @EpoxyAttribute
-    lateinit var model:ContentModel
+    lateinit var model:CategoryModel
 
     @EpoxyAttribute(DoNotHash)
     var starListener: View.OnClickListener? = null
@@ -30,21 +31,21 @@ abstract class PersonModel : EpoxyModelWithHolder<PersonModel.Holder>() {
 
     override fun bind(holder: Holder) {
         with(holder) {
-            image.setImageResource(model.placeholder)
-            text.text = model.roomName
-            image.setOnClickListener(starListener)
+           // image.setImageResource(model.placeholder)
+            text.text = model.name
+            text.setOnClickListener(starListener)
         }
     }
 
     override fun unbind(holder: Holder) {
         with(holder) {
-            image.setOnClickListener(null)
+            text.setOnClickListener(null)
         }
     }
 
 
     class Holder : BaseEpoxyHolder() {
-        val image : ImageView by bind(R.id.imageRoom)
+        //val image : ImageView by bind(R.id.imageRoom)
         val text : TextView by bind(R.id.textDescription)
     }
 }

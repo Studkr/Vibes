@@ -2,20 +2,21 @@ package com.vibesoflove.ui.home.adapter
 
 import com.airbnb.epoxy.TypedEpoxyController
 import com.airbnb.epoxy.carousel
+import com.vibesoflove.model.CategoryModel
 import com.vibesoflove.model.ContentModel
 
 class RoomController(
-        val onCardClick: (model: ContentModel) -> Unit
-) : TypedEpoxyController<List<ContentModel>>() {
+        val onCardClick: (model: CategoryModel) -> Unit
+) : TypedEpoxyController<List<CategoryModel>>() {
 
-    override fun buildModels(data: List<ContentModel>) {
+    override fun buildModels(data: List<CategoryModel>) {
         carousel {
             id("Room")
             hasFixedSize(true)
-            models(data.map {
+            models(data.mapIndexed { index, categoryModel ->
                 PersonModel_()
-                        .id(it.id)
-                        .model(it)
+                        .id(index)
+                        .model(categoryModel)
                         .starListener { model, parentView, clickedView, position ->
                             onCardClick(model.model)
                         }

@@ -1,10 +1,14 @@
 package com.vibesoflove.di
 
+import com.vibesoflove.system.PHOTO_API
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import dagger.android.support.AndroidSupportInjectionModule
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
@@ -24,5 +28,11 @@ interface AppComponent : AndroidInjector<DaggerApplication> {
         fun appModule(appModule: AppModule): Builder
         fun build(): AppComponent
     }
+
+    @Named(PHOTO_API)
+    fun retrofit(): Retrofit
+
+    @Named(PHOTO_API)
+    fun httpClient(): OkHttpClient
 
 }
