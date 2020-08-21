@@ -3,6 +3,7 @@ package com.vibesoflove.di
 import com.airbnb.epoxy.EpoxyAsyncUtil
 import com.airbnb.epoxy.EpoxyController
 import com.github.ajalt.timberkt.Timber
+import com.google.firebase.FirebaseApp
 import com.vibesoflove.BuildConfig
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
@@ -21,6 +22,7 @@ open class App : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        FirebaseApp.initializeApp(this)
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
@@ -28,6 +30,7 @@ open class App : DaggerApplication() {
         val handler = EpoxyAsyncUtil.getAsyncBackgroundHandler()
         EpoxyController.defaultDiffingHandler = handler
         EpoxyController.defaultModelBuildingHandler = handler
+
 
     }
 

@@ -2,6 +2,8 @@ package com.vibesoflove.di
 
 import android.app.Application
 import android.content.Context
+import com.google.firebase.firestore.FirebaseFirestore
+import com.vibesoflove.repository.RepositoryModule
 import com.vibesoflove.ui.loading.SplashActivityModule
 import com.vibesoflove.ui.main_activity.MainActivityModule
 import dagger.Module
@@ -15,13 +17,21 @@ import javax.inject.Singleton
         includes = [
             CoroutineContextModule::class,
             SplashActivityModule::class,
-            MainActivityModule::class
+            MainActivityModule::class,
+            RepositoryModule::class
+            //FirebaseModule::class
         ]
 )
 class AppModule(val app: Application) {
 
     @Provides
     fun context(): Context = app
+
+    @Provides
+    @Singleton
+    fun fireStore(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
+    }
 }
 
 const val ROH_USE_CASE = "SEARCH_LIST_USE_CASE_COROUTINE_CONTEXT"

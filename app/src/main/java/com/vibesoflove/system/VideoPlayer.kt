@@ -67,7 +67,27 @@ class VideoPlayer @Inject constructor(
         player.prepare(prepareFile(url))
         player.addListener(videoListener)
         player.playWhenReady = playWhenReady
+        player.repeatMode = Player.REPEAT_MODE_ONE
+
     }
+
+    fun initialiseFromApi(lifecycle: Lifecycle,url:String){
+        this.lifecycle = lifecycle.apply { addObserver(this@VideoPlayer) }
+        player.prepare(buildMediaSource(url))
+        player.addListener(videoListener)
+        player.playWhenReady = playWhenReady
+    }
+
+
+    private fun buildMediaSource(url: String): ProgressiveMediaSource {
+        val mUri: Uri = Uri.parse(url)
+        val dataSourceFactory = DefaultDataSourceFactory(
+                context, Util.getUserAgent(context, context.getString(R.string.app_name))
+        )
+        return ProgressiveMediaSource.Factory(dataSourceFactory)
+                .createMediaSource(mUri)
+    }
+
     private fun prepareFile(file: Int): ProgressiveMediaSource {
         val rawDataSource = RawResourceDataSource(context)
         rawDataSource.open(DataSpec(RawResourceDataSource.buildRawResourceUri(file)))
@@ -78,15 +98,6 @@ class VideoPlayer @Inject constructor(
         val defFactory = DefaultExtractorsFactory().setAdtsExtractorFlags(AdtsExtractor.FLAG_ENABLE_CONSTANT_BITRATE_SEEKING)
         return ProgressiveMediaSource.Factory(dataSourceFactory,defFactory)
                 .createMediaSource(rawDataSource.uri)
-    }
-
-    private fun buildMediaSource(url: String): ProgressiveMediaSource {
-        val mUri: Uri = Uri.parse(url)
-        val dataSourceFactory = DefaultDataSourceFactory(
-            context, Util.getUserAgent(context, context.getString(R.string.app_name))
-        )
-        return ProgressiveMediaSource.Factory(dataSourceFactory)
-            .createMediaSource(mUri)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
