@@ -35,6 +35,14 @@
         tools:layout="@layout/home_fragment" >
     </fragment>
 
+    <action
+        android:id="@+id/toAudioPlayer"
+        app:destination="@+id/fragmentAudioPlayer"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+
     <fragment
         android:id="@+id/fragmentCategory"
         android:name="com.vibesoflove.ui.home.deatils.FragmentCategory"
@@ -51,6 +59,11 @@
         android:name="com.vibesoflove.ui.home.video.FragmentVideoPlayer"
         android:label="fragment_video_player_fragment"
         tools:layout="@layout/fragment_video_player_fragment" />
+    <fragment
+        android:id="@+id/fragmentAudioPlayer"
+        android:name="com.vibesoflove.ui.audio.FragmentAudioPlayer"
+        android:label="fragment_audio_player_fragment"
+        tools:layout="@layout/fragment_audio_player_fragment" />
 
 
 </navigation>

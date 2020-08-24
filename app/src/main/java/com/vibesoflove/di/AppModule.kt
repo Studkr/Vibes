@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.google.firebase.firestore.FirebaseFirestore
 import com.vibesoflove.repository.RepositoryModule
+import com.vibesoflove.ui.audio.AudioServiceModule
 import com.vibesoflove.ui.loading.SplashActivityModule
 import com.vibesoflove.ui.main_activity.MainActivityModule
 import dagger.Module
@@ -18,8 +19,8 @@ import javax.inject.Singleton
             CoroutineContextModule::class,
             SplashActivityModule::class,
             MainActivityModule::class,
-            RepositoryModule::class
-            //FirebaseModule::class
+            RepositoryModule::class,
+            AudioServiceModule::class
         ]
 )
 class AppModule(val app: Application) {

@@ -3,6 +3,7 @@ package com.vibesoflove.ui.main_activity
 import androidx.lifecycle.ViewModel
 import com.flipsidegroup.nmt.di.viewmodel.ViewModelKey
 import com.vibesoflove.ui.MainActivity
+import com.vibesoflove.ui.audio.FragmentAudioPlayerModule
 import com.vibesoflove.ui.home.HomeFragmentModule
 import com.vibesoflove.ui.home.HomeFragmentViewModelModule
 import com.vibesoflove.ui.home.category_details.FragmentDetailsCategoryModule
@@ -20,7 +21,8 @@ interface MainActivityModule {
         HomeFragmentModule::class,
         FragmentCategoryModule::class,
         FragmentDetailsCategoryModule::class,
-        FragmentVIdeoPlayerModule::class
+        FragmentVIdeoPlayerModule::class,
+        FragmentAudioPlayerModule::class
     ])
     fun activity(): MainActivity
 }

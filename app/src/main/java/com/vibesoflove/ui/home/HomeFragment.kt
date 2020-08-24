@@ -52,7 +52,12 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         }
 
         observe(viewModel.openCategoryFragment){
-            parentFragment?.findNavController()?.navigate(R.id.toCategoryFragment, bundleOf("model" to it))
+            if(it.name == "Sound"){
+                parentFragment?.findNavController()?.navigate(R.id.toAudioPlayer)
+            }else{
+                parentFragment?.findNavController()?.navigate(R.id.toCategoryFragment, bundleOf("model" to it))
+            }
+
         }
     }
 

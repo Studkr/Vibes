@@ -25,9 +25,13 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
         <service
-            android:name=".ui.home.service.AudioService"
+            android:name=".ui.audio.AudioService"
             android:enabled="true"
             android:exported="true"></service>
+        <service
+            android:name=".ui.home.service.AudioService"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity
             android:name=".ui.loading.SplashActivity"

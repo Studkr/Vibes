@@ -7,6 +7,7 @@ import com.flipsidegroup.nmt.screen.app.roh.results.epoxyAdapter.BaseEpoxyHolder
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyAttribute.Option.DoNotHash
 import com.airbnb.epoxy.EpoxyModelClass
@@ -33,13 +34,13 @@ abstract class PersonModel : EpoxyModelWithHolder<PersonModel.Holder>() {
         with(holder) {
            // image.setImageResource(model.placeholder)
             text.text = model.name
-            text.setOnClickListener(starListener)
+            card.setOnClickListener(starListener)
         }
     }
 
     override fun unbind(holder: Holder) {
         with(holder) {
-            text.setOnClickListener(null)
+            card.setOnClickListener(null)
         }
     }
 
@@ -47,5 +48,6 @@ abstract class PersonModel : EpoxyModelWithHolder<PersonModel.Holder>() {
     class Holder : BaseEpoxyHolder() {
         //val image : ImageView by bind(R.id.imageRoom)
         val text : TextView by bind(R.id.textDescription)
+        val card :CardView by bind(R.id.cardList)
     }
 }

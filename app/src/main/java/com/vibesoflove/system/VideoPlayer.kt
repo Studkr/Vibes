@@ -77,6 +77,7 @@ class VideoPlayer @Inject constructor(
         player.prepare(buildMediaSource(url))
         player.addListener(videoListener)
         player.playWhenReady = playWhenReady
+        player.repeatMode = Player.REPEAT_MODE_ONE
     }
 
 
