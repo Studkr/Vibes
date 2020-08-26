@@ -8,11 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.flipsidegroup.nmt.di.viewmodel.ViewModelFactory
-import com.flipsidegroup.nmt.screen.app.map.audio.AudioPlayer
-import com.flipsidegroup.nmt.system.player.VideoPlayer
-import com.github.ajalt.timberkt.Timber
 import com.vibesoflove.R
-import com.vibesoflove.model.CategoryModel
 import com.vibesoflove.system.BaseFragment
 import com.vibesoflove.ui.home.adapter.RoomController
 import kotlinx.android.synthetic.main.home_fragment.*
@@ -24,15 +20,10 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
     @Inject
     lateinit var factory: ViewModelFactory
 
-//    @Inject
-//    lateinit var exoPlayer: VideoPlayer
-//
-//    @Inject
-//    lateinit var audioPlayer: AudioPlayer
 
     private val viewModel: HomeViewModel by viewModels { factory }
 
-    val contentAdapter = RoomController {
+    private val contentAdapter = RoomController {
             viewModel.openCategory(it)
     }
 
@@ -42,9 +33,7 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        exoPlayer.initialise(lifecycle, resources.getIdentifier("video", "raw", requireContext().packageName))
-//        videoView.player = exoPlayer.player
-//
+
        roomView.adapter = contentAdapter.adapter
 
         observe(viewModel.categoryList){

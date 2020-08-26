@@ -7,15 +7,13 @@ apply plugin: "kotlin-allopen"
 
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.vibesoflove"
         minSdkVersion 21
-
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 15
         versionName "1.9.7"
-        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -29,11 +27,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    dexOptions {
 
-        javaMaxHeapSize "4g"
-
-    }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
 
@@ -59,7 +53,6 @@ dependencies {
     implementation deps.coroutines
     implementation deps.stdlib
     implementation deps.lifecycleExtensions
-
 
     implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha06"

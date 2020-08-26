@@ -67,7 +67,7 @@ class VideoPlayer @Inject constructor(
         this.lifecycle = lifecycle.apply { addObserver(this@VideoPlayer) }
         player.prepare(prepareFile(url))
         player.addListener(videoListener)
-        player.playWhenReady = playWhenReady
+        player.playWhenReady = true
         player.repeatMode = Player.REPEAT_MODE_ONE
 
     }

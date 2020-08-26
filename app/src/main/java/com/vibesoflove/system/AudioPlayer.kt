@@ -31,26 +31,30 @@ class AudioPlayer @Inject constructor(
     private var lifecycle: Lifecycle? = null
     val exoPlayer: ExoPlayer = SimpleExoPlayer.Builder(context).build()
     private var _playerState = MutableStateFlow(Player.STATE_IDLE)
-    private var _isPlaying = MutableStateFlow(false)
+    var _isPlaying = MutableStateFlow(false)
     private var _currentError = MutableStateFlow<ExoPlaybackException?>(null)
     private var playWhenReady = true
     val errors: Flow<ExoPlaybackException> = _currentError.filterNotNull()
     val isPlayerChange = MutableStateFlow(" ")
-     val conteMediaSource = ConcatenatingMediaSource()
+    val conteMediaSource = ConcatenatingMediaSource()
 
     private var currentWindow: Int? = null
     private var currentPosition: Long? = null
 
 
-    fun initPlayer(lifecycle: Lifecycle,list:List<String>) {
+    fun initPlayer(lifecycle: Lifecycle, list: List<String>) {
         this.lifecycle = lifecycle.apply { addObserver(this@AudioPlayer) }
         exoPlayer.prepare(testPlayList(list))
         //exoPlayer.prepare(prepareFile(url))
         exoPlayer.playWhenReady = playWhenReady
     }
 
+    fun playSelected(position: Int){
+        exoPlayer.seekTo(position, C.TIME_UNSET)
+        exoPlayer.playWhenReady = true
+    }
 
-     val audioListener = object : Player.EventListener {
+    val audioListener = object : Player.EventListener {
         override fun onPlayerError(error: ExoPlaybackException) {
             super.onPlayerError(error)
             error.printStackTrace()
@@ -69,13 +73,13 @@ class AudioPlayer @Inject constructor(
         }
 
 
-     }
+    }
 
     fun changePlayWhenReady() {
         playWhenReady = true
     }
 
-    fun testPlayList(list : List<String>):ConcatenatingMediaSource{
+    fun testPlayList(list: List<String>): ConcatenatingMediaSource {
         list.mapIndexed { index, i ->
             val file = context.resources.getIdentifier(i, "raw", context.packageName)
             val rawDataSource = RawResourceDataSource(context)

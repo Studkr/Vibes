@@ -11,26 +11,32 @@
         android:id="@+id/audioController"
         android:layout_width="match_parent"
         android:layout_height="95dp"
+        android:layout_marginTop="20dp"
         app:controller_layout_id="@layout/custom_audio_controller"
         app:fastforward_increment="10000"
         app:hide_on_touch="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/songImage"
-        app:show_timeout="0"
-        app:use_artwork="false"
-        android:layout_marginTop="20dp"
-        app:use_controller="true" />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/songImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"
-        tools:src="@drawable/aquarium" />
+        app:show_timeout="0"
+        app:use_artwork="false"
+        app:use_controller="true" />
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@android:color/background_dark"
+        app:fastforward_increment="10000"
+        app:hide_on_touch="true"
+        app:layout_constraintBottom_toTopOf="@+id/audioController"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:show_timeout="1000"
+        app:use_controller="false" />
 
     <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/playListView"

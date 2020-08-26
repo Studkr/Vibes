@@ -1,18 +1,13 @@
 package com.vibesoflove.ui.home.category_details
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.flipsidegroup.nmt.di.viewmodel.ViewModelFactory
-import com.github.ajalt.timberkt.Timber
 import com.idapgroup.argumentdelegate.argumentDelegate
 import com.vibesoflove.R
 import com.vibesoflove.system.BaseFragment
@@ -38,7 +33,6 @@ class FragmentDetailsCategory : BaseFragment(R.layout.fragment_details_category_
         viewModel.loadData(data)
 
         videoList.adapter = controller.adapter
-
         videoList.layoutManager = GridLayoutManager(requireContext(),2)
         videoList.setItemSpacingDp(10)
 

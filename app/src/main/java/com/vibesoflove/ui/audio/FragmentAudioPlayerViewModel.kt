@@ -3,6 +3,8 @@ package com.vibesoflove.ui.audio
 import androidx.annotation.DrawableRes
 import androidx.lifecycle.*
 import com.flipsidegroup.nmt.screen.app.map.audio.AudioPlayer
+import com.github.ajalt.timberkt.Timber
+import com.hadilq.liveevent.LiveEvent
 import com.vibesoflove.R
 import com.vibesoflove.model.ContentModel
 import kotlinx.coroutines.flow.*
@@ -82,20 +84,20 @@ class FragmentAudioPlayerViewModel @Inject constructor(
     val curentAudioList = MutableLiveData<List<ContentModel>>()
 
     init {
-        curentAudioList.value = baseList
         viewModelScope.launch {
-
+            curentAudioList.value = baseList
         }
     }
 
     val flowList = MutableStateFlow(baseList)
 
     val _currentStatePlaySong =  flowList.combine(audioPlayer.isPlayerChange) { list, str ->
-        if (str.isNullOrEmpty()) {
+        if (str.isEmpty()) {
             list.mapIndexed { index, s ->
                 CurrentPlayList(
                         id = index,
                         songName = s.audioFileName,
+                        video = s.videoFileName,
                         placeholder = s.placeholder,
                         isPlaying = false
                 )
@@ -105,6 +107,7 @@ class FragmentAudioPlayerViewModel @Inject constructor(
                 CurrentPlayList(
                         id = index,
                         songName = s.audioFileName,
+                        video = s.videoFileName,
                         placeholder = s.placeholder,
                         isPlaying = str == s.audioFileName
                 )
@@ -114,12 +117,26 @@ class FragmentAudioPlayerViewModel @Inject constructor(
     }
     val currentSong = audioPlayer.isPlayerChange.asLiveData()
     val currentPlayList = _currentStatePlaySong.asLiveData()//MutableLiveData<List<CurrentPlayList>>()
+    val isPlaying = audioPlayer._isPlaying.asLiveData()
 
+
+    fun playListClicked(model :CurrentPlayList){
+        currentPlayList.value?.mapIndexed { index, currentPlayList ->
+            if(currentPlayList == model){
+                audioPlayer.playSelected(index)
+            }
+        }
+    }
+
+    fun fullScreenPresed() {
+
+    }
 }
 
 data class CurrentPlayList(
         val id: Int,
         val songName: String,
+        val video:String,
         @DrawableRes val placeholder:Int,
         val isPlaying: Boolean
 )

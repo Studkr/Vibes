@@ -1,12 +1,10 @@
 package com.vibesoflove.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hadilq.liveevent.LiveEvent
-import com.vibesoflove.R
 import com.vibesoflove.model.CategoryModel
 import com.vibesoflove.model.ContentModel
 import com.vibesoflove.repository.repository.PixelRepository
@@ -35,7 +33,9 @@ class HomeViewModel @Inject constructor(
     }
 
     fun openCategory(it: CategoryModel) {
-        openCategoryFragment.value = it
+        viewModelScope.launch {
+            openCategoryFragment.value = it
+        }
     }
 }
 

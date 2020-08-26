@@ -1,20 +1,25 @@
 package com.vibesoflove.ui.audio
 
-import android.content.Intent
+
+import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import androidx.core.content.ContextCompat
+import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.viewModels
 import com.flipsidegroup.nmt.di.viewmodel.ViewModelFactory
 import com.flipsidegroup.nmt.screen.app.map.audio.AudioPlayer
-import com.github.ajalt.timberkt.Timber
+import com.flipsidegroup.nmt.system.player.VideoPlayer
 import com.vibesoflove.R
 import com.vibesoflove.playlist
 import com.vibesoflove.system.BaseFragment
 import kotlinx.android.synthetic.main.custom_audio_controller.*
 import kotlinx.android.synthetic.main.fragment_audio_player_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import pro.shineapp.rentout.system.ext.observe
 import javax.inject.Inject
 
@@ -27,9 +32,14 @@ class FragmentAudioPlayer : BaseFragment(R.layout.fragment_audio_player_fragment
     @Inject
     lateinit var audioPlayer: AudioPlayer
 
+    @Inject
+    lateinit var videoPlayer: VideoPlayer
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         audioController.player = audioPlayer.exoPlayer
+        videoView.player = videoPlayer.player
 
         observe(viewModel.curentAudioList) {
             val list: MutableList<String> = arrayListOf()
@@ -38,8 +48,7 @@ class FragmentAudioPlayer : BaseFragment(R.layout.fragment_audio_player_fragment
             }
             if (it.size == list.size) initPlayer(list)
 
-            val i = Intent(requireContext(), AudioService::class.java)
-            requireContext().startService(i)
+            //
         }
         forwardButton.setOnClickListener {
             audioPlayer.exoPlayer.next()
@@ -49,13 +58,35 @@ class FragmentAudioPlayer : BaseFragment(R.layout.fragment_audio_player_fragment
             audioPlayer.exoPlayer.previous()
         }
 
-        observe(viewModel.currentSong) {
 
+        fullScreen.setOnClickListener {
+          viewModel.fullScreenPresed()
         }
 
+        observe(viewModel.isPlaying) {
+            if (it) {
+                GlobalScope.launch {
+                    withContext(Dispatchers.IO){
+                        AudioService.startService(requireContext(), "start")
+                    }
+                }
+            }
+        }
         observe(viewModel.currentPlayList) {
             initPlayList(it)
-            it.find { it.isPlaying == true }?.placeholder?.let { it1 -> songImage.setBackgroundResource(it1) }
+            it.map {
+                if (it.isPlaying) {
+                        initVideoPlayer(it.video)
+                }
+            }
+        }
+    }
+
+    fun initVideoPlayer(video: String) {
+        GlobalScope.launch {
+            withContext(Dispatchers.Main){
+                videoPlayer.initialise(lifecycle, resources.getIdentifier(video, "raw", requireContext().packageName))
+            }
         }
     }
 
@@ -72,11 +103,16 @@ class FragmentAudioPlayer : BaseFragment(R.layout.fragment_audio_player_fragment
                 playlist {
                     id(index)
                     song(s)
+                    viewModel(viewModel)
                 }
             }
         }
     }
+
 }
 
 
-
+@BindingAdapter("app:loadImage")
+fun loadImage(imageView:ImageView,image:CurrentPlayList){
+    imageView.setImageResource(image.placeholder)
+}

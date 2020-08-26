@@ -5,9 +5,13 @@
     <data>
 
         <import type="com.vibesoflove.ui.audio.CurrentPlayList"/>
+        <import type="com.vibesoflove.ui.audio.FragmentAudioPlayerViewModel"/>
         <variable
             name="song"
             type="CurrentPlayList" />
+        <variable
+            name="viewModel"
+            type="FragmentAudioPlayerViewModel" />
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,19 +23,32 @@
             android:id="@+id/songName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text ="My first song"
-            android:text="@{song.songName}"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@{ song.isPlaying ? @drawable/rounded_text_view_choose : @drawable/rounded_text_view}"
             android:paddingStart="8dp"
+            android:paddingTop="8dp"
             android:paddingEnd="8dp"
-            android:textSize="14sp"
+            android:paddingBottom="8dp"
+            android:text="@{song.songName}"
             android:textColor="@android:color/black"
-           android:background="@{ song.isPlaying ? @drawable/rounded_text_view_choose : @drawable/rounded_text_view}"
+            android:textSize="14sp"
+            android:onClick="@{()->viewModel.playListClicked(song)}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/playListImage"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="My first song" />
+
+        <ImageView
+            android:id="@+id/playListImage"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="16dp"
+            app:loadImage="@{song}"
+            app:layout_constraintBottom_toBottomOf="@+id/songName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/songName"
+            app:srcCompat="@drawable/aquarium" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
