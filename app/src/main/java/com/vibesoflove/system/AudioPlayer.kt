@@ -1,6 +1,7 @@
 package com.flipsidegroup.nmt.screen.app.map.audio
 
 import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
@@ -49,6 +50,12 @@ class AudioPlayer @Inject constructor(
         exoPlayer.playWhenReady = playWhenReady
     }
 
+    fun initFromApi(lifecycle: Lifecycle, audio: String){
+        this.lifecycle = lifecycle.apply { addObserver(this@AudioPlayer) }
+        exoPlayer.prepare(buildMediaSource(audio))
+        exoPlayer.playWhenReady = true
+    }
+
     fun playSelected(position: Int){
         exoPlayer.seekTo(position, C.TIME_UNSET)
         exoPlayer.playWhenReady = true
@@ -71,12 +78,20 @@ class AudioPlayer @Inject constructor(
             _playerState.value = playbackState
 
         }
-
-
     }
 
     fun changePlayWhenReady() {
         playWhenReady = true
+    }
+
+    private fun buildMediaSource(url: String): ProgressiveMediaSource {
+        val mUri: Uri = Uri.parse(url)
+        val dataSourceFactory = DefaultDataSourceFactory(
+                context, Util.getUserAgent(context, context.getString(R.string.app_name))
+        )
+        // val defFactory = DefaultExtractorsFactory().setAdtsExtractorFlags(AdtsExtractor.FLAG_ALLOW_NON_IDR_KEYFRAMES)
+        return ProgressiveMediaSource.Factory(dataSourceFactory)
+                .createMediaSource(mUri)
     }
 
     fun testPlayList(list: List<String>): ConcatenatingMediaSource {

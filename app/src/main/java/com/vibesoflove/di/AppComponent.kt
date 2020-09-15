@@ -1,5 +1,6 @@
 package com.vibesoflove.di
 
+import com.vibesoflove.db.DataBaseModule
 import com.vibesoflove.system.PHOTO_API
 import dagger.BindsInstance
 import dagger.Component
@@ -26,7 +27,9 @@ interface AppComponent : AndroidInjector<DaggerApplication> {
         fun application(application: App): Builder
 
         fun appModule(appModule: AppModule): Builder
+
         fun build(): AppComponent
+        fun dataBase (dataBase : DataBaseModule): Builder
     }
 
     @Named(PHOTO_API)

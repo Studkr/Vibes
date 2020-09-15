@@ -14,4 +14,9 @@
     <string name="sound">Sounds better with headsets =)</string>
     <string name="soundbutton">Got it!</string>
     <string name="default_notification_channel_id" translatable="false">vibes_notify</string>
+    <string name="title">Welcome!</string>
+    <string name="progress_bar_text">Loading</string>
+    <string name="mix_name">My Mix</string>
+    <string name="my_mix_text">Create your unical mix!</string>
+    <string name="content_audio">Music</string>
 </resources>

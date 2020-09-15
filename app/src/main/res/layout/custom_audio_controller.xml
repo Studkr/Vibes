@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+    android:background="@color/audio_duration_color">
 
     <com.google.android.exoplayer2.ui.DefaultTimeBar
         android:id="@id/exo_progress"
-        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="28dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content"
         android:focusable="true"
-        app:layout_constraintBottom_toTopOf="@+id/rewindButton"
+        android:paddingBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/audioExoImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:unplayed_color="@color/colorMain" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:played_color="@color/text_blue_color"
+        app:unplayed_color="@color/audio_duration_color" />
 
     <ImageButton
         android:id="@id/exo_play"
         style="@style/ExoMediaButton.Play"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginBottom="23dp"
         android:background="@drawable/transparent_clickable_item_round"
         android:src="@drawable/exo_controls_play"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/rewindButton"
         app:layout_constraintEnd_toStartOf="@+id/forwardButton"
         app:layout_constraintStart_toEndOf="@+id/rewindButton"
         app:layout_constraintTop_toTopOf="@+id/rewindButton" />
@@ -34,7 +36,7 @@
         style="@style/ExoMediaButton.Pause"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginBottom="18dp"
         android:background="@drawable/transparent_clickable_item_round"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,38 +44,38 @@
         app:layout_constraintStart_toEndOf="@+id/rewindButton"
         app:layout_constraintTop_toTopOf="@+id/rewindButton" />
 
+
     <ImageView
         android:id="@+id/forwardButton"
         style="@android:style/Widget.DeviceDefault.ImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginBottom="18dp"
         android:background="@drawable/transparent_clickable_item_round"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/exo_controls_fastforward" />
-
-    <ImageView
-        android:id="@+id/fullScreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:background="@drawable/transparent_clickable_item_round"
-        app:layout_constraintBottom_toBottomOf="@+id/rewindButton"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rewindButton"
-        app:srcCompat="@drawable/exo_icon_fullscreen_enter" />
+        app:srcCompat="@drawable/ic_audio_next" />
 
     <ImageView
         android:id="@+id/rewindButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
         android:layout_marginEnd="102dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginBottom="18dp"
         android:background="@drawable/transparent_clickable_item_round"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/forwardButton"
-        app:srcCompat="@drawable/exo_icon_rewind" />
+        app:layout_constraintTop_toTopOf="@+id/audioExoImage"
+        app:srcCompat="@drawable/ic_audio_bvack" />
 
+    <ImageView
+        android:id="@+id/audioExoImage"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:scr="@drawable/sem" />
 </androidx.constraintlayout.widget.ConstraintLayout>

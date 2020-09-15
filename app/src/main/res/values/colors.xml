@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#7CB0FF</color>
+    <color name="colorPrimaryDark">#E84A5F</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorMain">#EC407A</color>
     <color name="colorBack">#BDBDBD</color>
@@ -10,4 +10,10 @@
     <color name="button">#F6AE1C</color>
     <color name="back_button">#EC6C11 </color>
     <color name="proz">#0000ffff</color>
+    <color name="sea_blue">#4E9CB5</color>
+    <color name="header_text">#836767</color>
+    <color name="add_mix_color">#54FFDCD9</color>
+    <color name="text_blue_color">#7CB0FF</color>
+    <color name="audio_text_color">#E60E3746</color>
+    <color name="audio_duration_color">#2A363B</color>
 </resources>

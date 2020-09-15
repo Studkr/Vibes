@@ -2,6 +2,7 @@ package com.vibesoflove.ui.home
 
 import androidx.lifecycle.ViewModel
 import com.flipsidegroup.nmt.di.viewmodel.ViewModelKey
+import com.vibesoflove.ui.mix.MyMixFragmentModule
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

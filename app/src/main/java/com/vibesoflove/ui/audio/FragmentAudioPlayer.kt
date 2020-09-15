@@ -47,20 +47,14 @@ class FragmentAudioPlayer : BaseFragment(R.layout.fragment_audio_player_fragment
                 list.add(contentModel.audioFileName)
             }
             if (it.size == list.size) initPlayer(list)
-
-            //
         }
+
         forwardButton.setOnClickListener {
             audioPlayer.exoPlayer.next()
         }
 
         rewindButton.setOnClickListener {
             audioPlayer.exoPlayer.previous()
-        }
-
-
-        fullScreen.setOnClickListener {
-          viewModel.fullScreenPresed()
         }
 
         observe(viewModel.isPlaying) {
@@ -94,7 +88,6 @@ class FragmentAudioPlayer : BaseFragment(R.layout.fragment_audio_player_fragment
         audioPlayer.testPlayList(list)
         audioPlayer.exoPlayer.setForegroundMode(true)
         if (list.isNotEmpty()) audioPlayer.initPlayer(lifecycle, list)
-
     }
 
     private fun initPlayList(list: List<CurrentPlayList>) {

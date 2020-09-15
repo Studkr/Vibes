@@ -27,6 +27,29 @@
         app:exitAnim="@anim/fade_out"
         app:popEnterAnim="@anim/fade_in"
         app:popExitAnim="@anim/fade_out" />
+    <action
+        android:id="@+id/toAudioContent"
+        app:destination="@+id/audioContentFragment"
+        app:enterAnim="@animator/slide_in_left"
+        app:exitAnim="@animator/slide_out_right"
+        app:popEnterAnim="@animator/slide_in_right"
+        app:popExitAnim="@animator/slide_out_left" />
+
+    <action
+        android:id="@+id/toMyMixFragment"
+        app:destination="@+id/myMixContainer"
+        app:enterAnim="@animator/slide_in_left"
+        app:exitAnim="@animator/slide_out_right"
+        app:popEnterAnim="@animator/slide_in_right"
+        app:popExitAnim="@animator/slide_out_left" />
+
+    <action
+        android:id="@+id/toContentFragment"
+        app:destination="@+id/contentFragment"
+        app:enterAnim="@animator/slide_in_left"
+        app:exitAnim="@animator/slide_out_right"
+        app:popEnterAnim="@animator/slide_in_right"
+        app:popExitAnim="@animator/slide_out_left" />
 
     <fragment
         android:id="@+id/homeFragment"
@@ -64,6 +87,21 @@
         android:name="com.vibesoflove.ui.audio.FragmentAudioPlayer"
         android:label="fragment_audio_player_fragment"
         tools:layout="@layout/fragment_audio_player_fragment" />
+    <fragment
+        android:id="@+id/myMixContainer"
+        android:name="com.vibesoflove.ui.mix.MyMixContainer"
+        android:label="my_mix_container_fragment"
+        tools:layout="@layout/my_mix_container_fragment" />
+    <fragment
+        android:id="@+id/contentFragment"
+        android:name="com.vibesoflove.ui.content.ContentVideoFragment"
+        android:label="content_fragment"
+        tools:layout="@layout/content_fragment" />
+    <fragment
+        android:id="@+id/audioContentFragment"
+        android:name="com.vibesoflove.ui.content.audio.AudioContentFragment"
+        android:label="audio_content_fragment"
+        tools:layout="@layout/audio_content_fragment" />
 
 
 </navigation>

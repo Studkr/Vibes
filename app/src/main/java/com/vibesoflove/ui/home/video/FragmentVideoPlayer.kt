@@ -14,6 +14,7 @@ import com.idapgroup.argumentdelegate.argumentDelegate
 import com.vibesoflove.R
 import com.vibesoflove.model.Video
 import com.vibesoflove.model.VideoFile
+import com.vibesoflove.model.VideoPopular
 import com.vibesoflove.system.BaseFragment
 import kotlinx.android.synthetic.main.fragment_video_player_fragment.*
 import javax.inject.Inject
@@ -25,7 +26,7 @@ class FragmentVideoPlayer : BaseFragment(R.layout.fragment_video_player_fragment
     lateinit var exoPlayer: VideoPlayer
 
     @Inject
-    lateinit var factory:ViewModelFactory
+    lateinit var factory: ViewModelFactory
 
     private val viewModel: FragmentVideoPlayerViewModel by viewModels { factory }
 
@@ -36,6 +37,5 @@ class FragmentVideoPlayer : BaseFragment(R.layout.fragment_video_player_fragment
         videoView.player = exoPlayer.player
         exoPlayer.initialiseFromApi(lifecycle,video.link)
     }
-
 
 }

@@ -4,11 +4,16 @@ import androidx.lifecycle.ViewModel
 import com.flipsidegroup.nmt.di.viewmodel.ViewModelKey
 import com.vibesoflove.ui.MainActivity
 import com.vibesoflove.ui.audio.FragmentAudioPlayerModule
+import com.vibesoflove.ui.content.ContentFragmentModule
+import com.vibesoflove.ui.content.audio.AudioContentModule
 import com.vibesoflove.ui.home.HomeFragmentModule
-import com.vibesoflove.ui.home.HomeFragmentViewModelModule
 import com.vibesoflove.ui.home.category_details.FragmentDetailsCategoryModule
 import com.vibesoflove.ui.home.deatils.FragmentCategoryModule
 import com.vibesoflove.ui.home.video.FragmentVIdeoPlayerModule
+import com.vibesoflove.ui.mix.MyMixFragmentModule
+import com.vibesoflove.ui.mix.item.ItemMixModule
+import com.vibesoflove.ui.mix.item.photo.PhotoMixModule
+import com.vibesoflove.ui.mix.item.video.VideoMixFragmentModule
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -22,7 +27,13 @@ interface MainActivityModule {
         FragmentCategoryModule::class,
         FragmentDetailsCategoryModule::class,
         FragmentVIdeoPlayerModule::class,
-        FragmentAudioPlayerModule::class
+        FragmentAudioPlayerModule::class,
+        MyMixFragmentModule::class,
+        ItemMixModule::class,
+        ContentFragmentModule::class,
+        PhotoMixModule::class,
+        VideoMixFragmentModule::class,
+        AudioContentModule::class
     ])
     fun activity(): MainActivity
 }
