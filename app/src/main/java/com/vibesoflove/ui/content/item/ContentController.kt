@@ -1,6 +1,7 @@
-package com.vibesoflove.ui.content
+package com.vibesoflove.ui.content.item
 
 import com.airbnb.epoxy.TypedEpoxyController
+
 
 class ContentController(
         val click: (model: ContentModel) -> Unit

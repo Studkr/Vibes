@@ -29,7 +29,7 @@ data class Video (
         @JsonProperty("video_files")
         val videoFiles: List<VideoFile>,
         @JsonProperty("video_pictures")
-        val videoPictures: List<VideoPicture>
+        val videoPictures: List<VideoPicture?>
 )
 @Parcelize
 data class User (
@@ -65,7 +65,7 @@ enum class Quality {
 }
 @Parcelize
 data class VideoPicture (
-        val id: Long,
-        val picture: String,
-        val nr: Long
+        val id: Long?,
+        val picture: String?,
+        val nr: Long?
 ):Parcelable

@@ -45,7 +45,7 @@
 
     <action
         android:id="@+id/toContentFragment"
-        app:destination="@+id/contentFragment"
+        app:destination="@+id/categoryContainerFragment"
         app:enterAnim="@animator/slide_in_left"
         app:exitAnim="@animator/slide_out_right"
         app:popEnterAnim="@animator/slide_in_right"
@@ -94,7 +94,7 @@
         tools:layout="@layout/my_mix_container_fragment" />
     <fragment
         android:id="@+id/contentFragment"
-        android:name="com.vibesoflove.ui.content.ContentVideoFragment"
+        android:name="com.vibesoflove.ui.content.item.ContentVideoFragment"
         android:label="content_fragment"
         tools:layout="@layout/content_fragment" />
     <fragment
@@ -102,6 +102,11 @@
         android:name="com.vibesoflove.ui.content.audio.AudioContentFragment"
         android:label="audio_content_fragment"
         tools:layout="@layout/audio_content_fragment" />
+    <fragment
+        android:id="@+id/categoryContainerFragment"
+        android:name="com.vibesoflove.ui.content.CategoryContainerFragment"
+        android:label="category_container_fragment"
+        tools:layout="@layout/category_container_fragment" />
 
 
 </navigation>

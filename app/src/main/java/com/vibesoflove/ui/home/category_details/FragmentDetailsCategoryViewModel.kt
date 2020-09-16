@@ -24,7 +24,7 @@ class FragmentDetailsCategoryViewModel @Inject constructor(
 
     fun loadData(data: String) {
         viewModelScope.launch {
-            videoList.value = api.getVideoCategory(data)
+           // videoList.value = api.getVideoCategory(data)
         }
     }
 

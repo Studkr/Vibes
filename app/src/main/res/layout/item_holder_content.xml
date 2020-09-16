@@ -2,15 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <import type="com.vibesoflove.ui.content.ContentViewModel"/>
-        <import type="com.vibesoflove.ui.content.ContentModel"/>
+        <import type="com.vibesoflove.ui.content.item.ContentViewModel"/>
+        <import type="com.vibesoflove.ui.content.item.ContentModel"/>
 
         <variable
             name="viewModel"
-            type="ContentViewModel" />
+            type="com.vibesoflove.ui.content.item.ContentViewModel" />
         <variable
             name="image"
-            type="ContentModel" />
+            type="com.vibesoflove.ui.content.item.ContentModel" />
         <variable
             name="isSaved"
             type="Boolean" />

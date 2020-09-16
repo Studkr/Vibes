@@ -1,20 +1,14 @@
 package com.vibesoflove.ui.home.video
 
-import androidx.lifecycle.ViewModelProviders
+
 import android.os.Bundle
-import android.provider.MediaStore
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.flipsidegroup.nmt.di.viewmodel.ViewModelFactory
 import com.flipsidegroup.nmt.system.player.VideoPlayer
 import com.idapgroup.argumentdelegate.argumentDelegate
 import com.vibesoflove.R
-import com.vibesoflove.model.Video
 import com.vibesoflove.model.VideoFile
-import com.vibesoflove.model.VideoPopular
 import com.vibesoflove.system.BaseFragment
 import kotlinx.android.synthetic.main.fragment_video_player_fragment.*
 import javax.inject.Inject

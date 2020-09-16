@@ -18,6 +18,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.upstream.RawResourceDataSource
 import com.google.android.exoplayer2.util.Util
 import com.vibesoflove.R
+import com.vibesoflove.ui.content.audio.AudioListModule
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -50,13 +51,13 @@ class AudioPlayer @Inject constructor(
         exoPlayer.playWhenReady = playWhenReady
     }
 
-    fun initFromApi(lifecycle: Lifecycle, audio: String){
+    fun initFromApi(lifecycle: Lifecycle, audio: List<AudioListModule>) {
         this.lifecycle = lifecycle.apply { addObserver(this@AudioPlayer) }
-        exoPlayer.prepare(buildMediaSource(audio))
-        exoPlayer.playWhenReady = true
+        exoPlayer.prepare(loadPlayListFromApi(audio))
+        exoPlayer.playWhenReady = false
     }
 
-    fun playSelected(position: Int){
+    fun playSelected(position: Int) {
         exoPlayer.seekTo(position, C.TIME_UNSET)
         exoPlayer.playWhenReady = true
     }
@@ -109,6 +110,20 @@ class AudioPlayer @Inject constructor(
                     .createMediaSource(rawDataSource.uri))
         }
         return conteMediaSource
+    }
+
+    private fun loadPlayListFromApi(list: List<AudioListModule>): ConcatenatingMediaSource{
+            list.mapIndexed { index, audioListModule ->
+                val mUri: Uri = Uri.parse(audioListModule.audio.link)
+                val dataSourceFactory = DefaultDataSourceFactory(
+                        context, Util.getUserAgent(context, context.getString(R.string.app_name))
+                )
+                val defFactory = DefaultExtractorsFactory().setAdtsExtractorFlags(AdtsExtractor.FLAG_ENABLE_CONSTANT_BITRATE_SEEKING)
+                conteMediaSource.addMediaSource(ProgressiveMediaSource.Factory(dataSourceFactory, defFactory)
+                        .setTag(index)
+                        .createMediaSource(mUri))
+            }
+        return  conteMediaSource
     }
 
 

@@ -1,8 +1,7 @@
-package com.vibesoflove.ui.content
+package com.vibesoflove.ui.content.item
 
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder

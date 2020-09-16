@@ -1,15 +1,12 @@
-package com.vibesoflove.ui.content
+package com.vibesoflove.ui.content.item
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.distinctUntilChanged
-import androidx.lifecycle.viewModelScope
-import com.github.ajalt.timberkt.Timber
+import androidx.lifecycle.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.vibesoflove.db.PhotoEntity
-import com.vibesoflove.db.VideoDao
 import com.vibesoflove.db.VideoEntity
+import com.vibesoflove.model.CategoryFirebaseModel
 import com.vibesoflove.model.Photo
+import com.vibesoflove.model.Video
 import com.vibesoflove.model.VideoPopular
 import com.vibesoflove.repository.repository.DataBaseRepository
 import com.vibesoflove.repository.repository.PixelRepository
@@ -23,10 +20,17 @@ class ContentViewModel @Inject constructor(
         private val dataBaseRepo: DataBaseRepository
 ) : ViewModel() {
 
-    private val popularVideo = MutableStateFlow<List<VideoPopular>>(emptyList())
+    private val popularVideo = MutableStateFlow<List<Video>>(emptyList())
     private val savedVideo = dataBaseRepo.getSavedVideo()
     private val popularPhoto = MutableStateFlow<List<Photo>>(emptyList())
     private val savedPhoto = dataBaseRepo.getSavedPhoto()
+    val firebaseCategory = MutableLiveData<List<CategoryFirebaseModel>>()
+
+    init {
+        firestore.collection("relax").get().addOnSuccessListener {
+            firebaseCategory.value = it.toObjects(CategoryFirebaseModel::class.java)
+        }
+    }
 
     val currentPopularVideo = popularVideo.combine(savedVideo) { video, savedVideo ->
         video.map {
@@ -51,10 +55,10 @@ class ContentViewModel @Inject constructor(
      }.asLiveData()
 
 
-    fun loadData(data: String) {
+    fun loadData(data: String, name: String) {
         when (data) {
             "new video" -> {
-                loadVideo()
+                loadVideo(name)
             }
             "new photo" -> {
                 loadPhoto()
@@ -69,9 +73,9 @@ class ContentViewModel @Inject constructor(
     }
 
 
-    fun loadVideo() {
+    fun loadVideo(name: String) {
         viewModelScope.launch {
-            popularVideo.value = pixelRepository.getPopularVideo().videos
+            popularVideo.value = pixelRepository.getVideoCategory(name)
 
         }
     }

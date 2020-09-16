@@ -1,4 +1,4 @@
-package com.vibesoflove.ui.content
+package com.vibesoflove.ui.content.item
 
 import androidx.lifecycle.ViewModel
 import com.flipsidegroup.nmt.di.viewmodel.ViewModelKey

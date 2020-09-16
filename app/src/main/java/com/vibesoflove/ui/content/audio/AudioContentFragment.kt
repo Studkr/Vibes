@@ -17,7 +17,6 @@ import com.vibesoflove.model.AudioFirebaseModel
 import com.vibesoflove.system.BaseFragment
 import com.vibesoflove.ui.audio.AudioService
 import kotlinx.android.synthetic.main.audio_content_fragment.*
-import kotlinx.android.synthetic.main.content_fragment.back
 import kotlinx.android.synthetic.main.custom_audio_controller.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -62,16 +61,24 @@ class AudioContentFragment : BaseFragment(R.layout.audio_content_fragment) {
             audioControllerContent.isVisible = it
         }
 
-        observe(viewModel.beginPlayAudio){
+        forwardButton.setOnClickListener {
+            audioPlayer.exoPlayer.next()
+        }
+
+        rewindButton.setOnClickListener {
+            audioPlayer.exoPlayer.previous()
+        }
+
+        observe(viewModel.currentPlaylist){
             playAudio(it)
         }
+
     }
 
 
-    private fun playAudio(model:AudioListModule){
-        audioPlayer.initFromApi(lifecycle,model.audio.link)
+    private fun playAudio(model:List<AudioListModule>){
+        audioPlayer.initFromApi(lifecycle,model)
         audioPlayer.exoPlayer.setForegroundMode(true)
-        audioExoImage.loadImageCrop(model.audio.image)
     }
 
    private fun setData(list:List<AudioListModule>){

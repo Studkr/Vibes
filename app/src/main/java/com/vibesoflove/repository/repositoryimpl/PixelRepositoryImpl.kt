@@ -12,8 +12,9 @@ import javax.inject.Inject
 class PixelRepositoryImpl @Inject constructor(
         private val api : PixelsApi
 ):PixelRepository{
-    override suspend fun getVideoCategory(category: String): VideoModel  = withContext(Dispatchers.IO){
-        api.searchVideo(category, API_KEY)
+
+    override suspend fun getVideoCategory(category: String): List<Video> = withContext(Dispatchers.IO){
+        api.searchVideo(category, API_KEY).videos
     }
 
     override suspend fun getPopularVideo(): PopularVideoModel = withContext(Dispatchers.IO) {

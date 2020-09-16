@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.vibesoflove.ui.mix.item.ItemMixFragment
+import com.vibesoflove.ui.mix.item.audio.AudioItemFragment
 import com.vibesoflove.ui.mix.item.photo.PhotoMixFragment
 import com.vibesoflove.ui.mix.item.video.VideoMixFragment
 
@@ -15,13 +16,15 @@ class MyMixFragmentAdapter(fm:FragmentManager,lifecycle: Lifecycle) :FragmentSta
                 Tabs.ItemMixFragment -> ItemMixFragment()
                 Tabs.VideoMixFragment -> VideoMixFragment()
                 Tabs.AudioMixFrament -> PhotoMixFragment()
+                Tabs.AudioItemFragment -> AudioItemFragment()
             }
 }
 
 enum class Tabs (val position :Int,tabName:String){
     ItemMixFragment(0,"My mix"),
     VideoMixFragment(1,"Video"),
-    AudioMixFrament(2,"Photo");
+    AudioMixFrament(2,"Photo"),
+    AudioItemFragment(3,"Music");
     companion object{
         fun get(position: Int) = values().find {
             it.position == position

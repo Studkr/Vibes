@@ -22,7 +22,7 @@ class AudioContentViewModel @Inject constructor(
         private val audioPlayer: AudioPlayer
 ) : ViewModel() {
 
-    private val audioCategoriList = MutableStateFlow<List<AudioFirebaseModel>>(emptyList())
+    val audioCategoriList = MutableStateFlow<List<AudioFirebaseModel>>(emptyList())
     private val savedAudioList = dataBaseRepo.getAudioList()
     val beginPlayAudio = LiveEvent<AudioListModule>()
 
@@ -45,8 +45,14 @@ class AudioContentViewModel @Inject constructor(
     }
 
     fun audioClicked(audioModel: AudioListModule) {
-        beginPlayAudio.value = audioModel
+        audioCategoriList.value.mapIndexed {index, model ->
+            if(model.id == audioModel.id){
+                audioPlayer.playSelected(index)
+            }
+        }
     }
+
+
 
     fun saveAudioToFavorite(audioModel: AudioListModule) {
         viewModelScope.launch {
