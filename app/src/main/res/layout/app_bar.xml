@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="18dp"
+        android:fontFamily="@font/inter_bold"
         android:text="@string/title"
         android:textColor="@color/sea_blue"
         android:textSize="36sp"

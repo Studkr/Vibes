@@ -10,10 +10,11 @@ import androidx.room.RoomDatabase
     DataBaseEntity::class,
     VideoEntity::class,
     PhotoEntity::class,
-    AudioEntity::class
+    AudioEntity::class,
+    MixContainer::class
 ], version = 4)
 abstract class DataBase : RoomDatabase() {
-
+    abstract fun mix(): MixContainerDao
     abstract fun dao(): DataBaseDao
     abstract fun videoDao(): VideoDao
     abstract fun photoDao():PhotoDao

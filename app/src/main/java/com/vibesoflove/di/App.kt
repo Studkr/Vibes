@@ -4,6 +4,7 @@ import com.airbnb.epoxy.EpoxyAsyncUtil
 import com.airbnb.epoxy.EpoxyController
 import com.github.ajalt.timberkt.Timber
 import com.google.firebase.FirebaseApp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.vibesoflove.BuildConfig
 import com.vibesoflove.db.DataBaseModule
 import dagger.android.AndroidInjector
@@ -29,7 +30,7 @@ open class App : DaggerApplication() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
-
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
         val handler = EpoxyAsyncUtil.getAsyncBackgroundHandler()
         EpoxyController.defaultDiffingHandler = handler
         EpoxyController.defaultModelBuildingHandler = handler

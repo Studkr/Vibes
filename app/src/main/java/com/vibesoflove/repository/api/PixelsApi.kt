@@ -11,6 +11,9 @@ interface PixelsApi {
     @GET("/videos/search")
     suspend fun searchVideo(@Query("query") category: String, @Header("Authorization") auth: String): VideoModel
 
+    @GET("/v1/search")
+    suspend fun findPhotoCategory(@Query("query")category:String,@Header("Authorization") auth: String): PopularPhoto
+
     @GET("/videos/popular")
     suspend fun popularVideo(@Header("Authorization") auth: String): PopularVideoModel
 

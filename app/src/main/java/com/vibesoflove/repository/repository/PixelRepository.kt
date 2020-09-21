@@ -14,4 +14,6 @@ interface PixelRepository {
    suspend fun findVideoById(id:Long): VideoPopular
 
     suspend fun findPhotoById(id:Long):Photo
+
+    suspend fun findPhotoCategory(category: String):PopularPhoto
 }

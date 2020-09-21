@@ -4,13 +4,13 @@
     <data>
         <import type="com.vibesoflove.ui.mix.item.video.VideoMixViewModel"/>
         <import type="com.vibesoflove.model.VideoPopular"/>
-        <import type="com.vibesoflove.ui.mix.item.MixModel"/>
+        <import type="com.vibesoflove.ui.mix.item.video.MixVideo"/>
         <variable
             name="viewModel"
             type="VideoMixViewModel" />
         <variable
             name="image"
-            type="MixModel" />
+            type="MixVideo" />
         <variable
             name="isSaved"
             type="Boolean" />
@@ -41,6 +41,7 @@
                     android:id="@+id/saveData"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@{image.isChoose? @drawable/ic_mix_choose : @drawable/ic_mix_is_choose}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

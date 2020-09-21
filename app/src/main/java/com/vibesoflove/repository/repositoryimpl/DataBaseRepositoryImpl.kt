@@ -11,7 +11,8 @@ class DataBaseRepositoryImpl @Inject constructor(
         private val dao: DataBaseDao,
         private val videoDao: VideoDao,
         private val photoDao: PhotoDao,
-        private val audioDao: AudioDao
+        private val audioDao: AudioDao,
+        private val mixContainerDao: MixContainerDao
 ) : DataBaseRepository {
     override suspend fun insert(model: DataBaseEntity) = withContext(Dispatchers.IO) {
         dao.insert(model)
@@ -55,5 +56,15 @@ class DataBaseRepositoryImpl @Inject constructor(
     }
 
     override fun getAudioList(): Flow<List<AudioEntity>> = audioDao.getAudioList()
+
+    override suspend fun insertInContainer(model: MixContainer) = withContext(Dispatchers.IO) {
+        mixContainerDao.insert(model)
+    }
+
+    override suspend fun deleteFromContainer(model: MixContainer) = withContext(Dispatchers.IO) {
+        mixContainerDao.delete(model)
+    }
+
+    override fun getContainer(): Flow<MixContainer>  = mixContainerDao.getData()
 
 }

@@ -3,8 +3,7 @@ package com.vibesoflove.ui.mix.item.video
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.github.ajalt.timberkt.Timber
-import com.vibesoflove.db.DataBaseEntity
+import com.vibesoflove.db.MixContainer
 import com.vibesoflove.repository.repository.DataBaseRepository
 import com.vibesoflove.repository.repository.PixelRepository
 import com.vibesoflove.ui.mix.item.MixModel
@@ -20,38 +19,31 @@ class VideoMixViewModel @Inject constructor(
 ): ViewModel() {
     private  val currentData = MutableStateFlow<List<MixModel>>(emptyList())
     private  val savedData = dataBaseRepository.getSavedVideo()
-    private val savedMix = dataBaseRepository.getAll()
+    private val mixContainer = dataBaseRepository.getContainer()
     val videoList =  currentData.combine(savedData){ baseModel, dataBase ->
         dataBase.map {
-            MixModel(
+            MixVideo(
                     id = it.id,
                     placeholder =  pixelRepository.findVideoById(it.id).image,
-                    type = "Video"
+                    type = "Video",
+                    isChoose = false
             )
         }
     }.asLiveData()
 
 
-    fun saveVideo(model: MixModel){
+    fun saveVideo(model: MixVideo){
         viewModelScope.launch {
-            savedMix.collect {
-              if(it.isEmpty()){
-                  Timber.i{
-                      "Add"
-                  }
-              }
-                    it.map {
-                        if(it.id == model.id){
-                            Timber.i{
-                                "this element is not  saved"
-                            }
-                        }else{
-                            Timber.i{
-                                "this element whas saved"
-                            }
-                        }
-                    }
+            mixContainer.collect {
+
             }
         }
     }
 }
+
+data class MixVideo(
+        val id: Long,
+        val placeholder: String,
+        val type: String,
+        val isChoose: Boolean
+)

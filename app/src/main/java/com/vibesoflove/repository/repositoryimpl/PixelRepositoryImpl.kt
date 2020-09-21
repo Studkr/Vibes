@@ -29,4 +29,8 @@ class PixelRepositoryImpl @Inject constructor(
     override suspend fun findPhotoById(id: Long): Photo = withContext(Dispatchers.IO){
         api.findPhotoById(id, API_KEY)
     }
+
+    override suspend fun findPhotoCategory(category: String): PopularPhoto = withContext(Dispatchers.IO) {
+        api.findPhotoCategory(category, API_KEY)
+    }
 }

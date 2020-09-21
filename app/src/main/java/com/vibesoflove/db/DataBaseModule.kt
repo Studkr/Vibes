@@ -31,4 +31,8 @@ class DataBaseModule @Inject constructor(
     @Singleton
     @Provides
     fun provideAudio():AudioDao = db.audioDao()
+
+    @Singleton
+    @Provides
+    fun provideMix():MixContainerDao = db.mix()
 }

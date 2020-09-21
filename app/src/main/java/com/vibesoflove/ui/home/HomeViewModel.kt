@@ -14,6 +14,7 @@ import com.vibesoflove.repository.repository.DataBaseRepository
 import com.vibesoflove.repository.repository.PixelRepository
 import com.vibesoflove.ui.mix.MyMixContainer
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -25,13 +26,16 @@ class HomeViewModel @Inject constructor(
         private val dataBaseRepo: DataBaseRepository,
         private val audioPlayer: AudioPlayer
 ) : ViewModel() {
+
     val baseList = MutableStateFlow<List<AudioFirebaseModel>>(emptyList())
     val content = MutableLiveData<List<ContentModel>>()
     val categoryList = MutableLiveData<List<CategoryModel>>()
     val openVideoFragment = LiveEvent<VideoFile>()
+
     private val popularVideo = MutableStateFlow<List<VideoPopular>>(emptyList())
     private val popularPhoto = MutableStateFlow<List<Photo>>(emptyList())
     private val audioList = MutableLiveData<List<AudioFirebaseModel>>()
+
     val openAudioPlayer = LiveEvent<String>()
     val openMyMix = LiveEvent<String>()
     val openContent = LiveEvent<String>()

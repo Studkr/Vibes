@@ -22,4 +22,9 @@ interface DataBaseRepository {
     suspend fun insertAudio(model:AudioEntity)
     suspend fun deleteAudio(model:AudioEntity)
     fun getAudioList():Flow<List<AudioEntity>>
+
+
+    suspend fun insertInContainer(model : MixContainer)
+    suspend fun deleteFromContainer(model: MixContainer)
+    fun getContainer():Flow<MixContainer>
 }

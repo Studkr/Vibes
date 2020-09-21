@@ -61,14 +61,14 @@ class ContentViewModel @Inject constructor(
                 loadVideo(name)
             }
             "new photo" -> {
-                loadPhoto()
+                loadPhoto(name)
             }
         }
     }
 
-    private fun loadPhoto() {
+    private fun loadPhoto(category: String) {
         viewModelScope.launch {
-            popularPhoto.value = pixelRepository.getPopularPhoto().photos
+            popularPhoto.value = pixelRepository.findPhotoCategory(category).photos
         }
     }
 
