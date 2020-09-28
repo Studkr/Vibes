@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.fasterxml.jackson.core.JsonProcessingException
 import com.flipsidegroup.nmt.screen.app.map.audio.AudioPlayer
 import com.github.ajalt.timberkt.Timber
 import com.google.firebase.firestore.FirebaseFirestore
@@ -12,12 +13,13 @@ import com.vibesoflove.db.DataBaseEntity
 import com.vibesoflove.model.*
 import com.vibesoflove.repository.repository.DataBaseRepository
 import com.vibesoflove.repository.repository.PixelRepository
+import com.vibesoflove.system.Resource
+import com.vibesoflove.system.Status
 import com.vibesoflove.ui.mix.MyMixContainer
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.lang.Exception
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
@@ -44,15 +46,33 @@ class HomeViewModel @Inject constructor(
 
     private val savedList = MutableStateFlow<List<DataBaseEntity>>(emptyList())
 
+    val errorMessage = LiveEvent<String>()
+
     init {
+        updateData()
+    }
+
+
+    fun updateData(){
         viewModelScope.launch {
             getCategory()
+            try {
+                popularVideo.value = pixelRepository.getPopularVideo().videos
+                popularPhoto.value = pixelRepository.getPopularPhoto().photos
+            }catch (e:Exception){
+                if(e.message?.contains("No address associated with hostname") == true){
+                    errorMessage.value = "Check internet"
+                }else{
+                    errorMessage.value = "Please check internet? and reran application"
+                }
+            }
+
             firestore.collection("music").get()
                     .addOnSuccessListener {
                         baseList.value = it.toObjects(AudioFirebaseModel::class.java)
                     }
-            popularVideo.value = pixelRepository.getPopularVideo().videos
-            popularPhoto.value = pixelRepository.getPopularPhoto().photos
+
+
             audioList.value = baseList.value
             dataBaseRepo.getAll().map {
                 savedList.value = it
@@ -60,13 +80,15 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+
+
     val contentCategory = popularVideo.combine(popularPhoto) { video, photo ->
-        PopularContent(
-                video,
-                photo,
-                baseList.value,
-                savedList.value
-        )
+                PopularContent(
+                        video,
+                        photo,
+                        baseList.value,
+                        savedList.value,
+                )
     }.asLiveData()
 
     private fun getCategory() {

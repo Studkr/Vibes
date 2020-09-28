@@ -26,5 +26,6 @@ interface DataBaseRepository {
 
     suspend fun insertInContainer(model : MixContainer)
     suspend fun deleteFromContainer(model: MixContainer)
-    fun getContainer():Flow<MixContainer>
+    fun getContainer():Flow<List<MixContainer>>
+    suspend fun updateData(model: MixContainer)
 }

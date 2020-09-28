@@ -1,6 +1,7 @@
 package com.vibesoflove.ui.home
 
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -70,6 +71,26 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
 
         observe(viewModel.isPlaying){
            audioPlayerView.isVisible = it
+        }
+
+        observe(viewModel.errorMessage){
+         progressHome.isVisible = false
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Error")
+                    .setMessage(it)
+                    .setIcon(R.drawable.ic_error)
+                    .setPositiveButton("Ok") {
+                        dialog, id ->
+                        dialog.cancel()
+                        System.exit(0)
+                    }
+                    .setNegativeButton("Retry"){ dialog, id ->
+                        viewModel.updateData()
+                        progressHome.isVisible = true
+                    }
+            builder.create()
+            builder.setCancelable(false)
+            builder.show()
         }
 
         observe(viewModel.openContent) {

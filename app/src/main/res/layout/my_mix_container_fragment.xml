@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <include
-        android:id="@+id/include2"
+        android:id="@+id/mixContainer"
         layout="@layout/item_holder_empty_mix"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -63,7 +63,7 @@
         android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2"
+        app:layout_constraintTop_toBottomOf="@+id/mixContainer"
         app:tabIndicatorColor="@color/colorMain"
         app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/colorBlack"

@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.flipsidegroup.nmt.di.viewmodel.ViewModelFactory
+import com.flipsidegroup.nmt.system.loadImageCrop
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vibesoflove.R
 import com.vibesoflove.system.BaseFragment
@@ -17,7 +19,9 @@ import com.vibesoflove.ui.mix.adapter.MyMixFragmentAdapter
 import com.vibesoflove.ui.mix.adapter.Tabs
 import com.vibesoflove.ui.mix.animation.ZoomOutPageTransformer
 import com.vibesoflove.ui.mix.item.ItemMixFragment
+import kotlinx.android.synthetic.main.item_holder_empty_mix.*
 import kotlinx.android.synthetic.main.my_mix_container_fragment.*
+import pro.shineapp.rentout.system.ext.observe
 import java.lang.IndexOutOfBoundsException
 import javax.inject.Inject
 
@@ -48,6 +52,18 @@ class MyMixContainer : BaseFragment(R.layout.my_mix_container_fragment) {
         TabLayoutMediator(mixTabs, mixViewPager, TabLayoutMediator.TabConfigurationStrategy { tab, position ->
             tab.text = mixList[Tabs.get(position).position]
         }).attach()
+
+        observe(viewModel.mix){
+            if(it.isNotEmpty()){
+                viewModel.createMix(it.first())
+            }
+        }
+
+        observe(viewModel.mixImage){
+            imageVideoCategory.loadImageCrop(it)
+            addImage.isVisible = false
+        }
+
     }
 
 }

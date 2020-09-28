@@ -65,6 +65,7 @@ class DataBaseRepositoryImpl @Inject constructor(
         mixContainerDao.delete(model)
     }
 
-    override fun getContainer(): Flow<MixContainer>  = mixContainerDao.getData()
+    override fun getContainer(): Flow<List<MixContainer>>  = mixContainerDao.getData()
+    override suspend fun updateData(model: MixContainer) = withContext(Dispatchers.IO){mixContainerDao.update(model)}
 
 }

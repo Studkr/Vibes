@@ -1,9 +1,6 @@
 package com.vibesoflove.db
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -15,5 +12,8 @@ interface MixContainerDao {
     fun delete(model: MixContainer)
 
     @Query("SELECT * FROM mix_container")
-    fun getData(): Flow<MixContainer>
+    fun getData(): Flow<List<MixContainer>>
+
+    @Update
+    fun update(model: MixContainer)
 }

@@ -13,5 +13,5 @@ data class MixContainer(
         @ColumnInfo(name = "audioId")
         val audioId : Long,
         @ColumnInfo(name = "imageId")
-        val imageId :Long
+        val imageId :String
 )
