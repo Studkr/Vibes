@@ -4,21 +4,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.fasterxml.jackson.core.JsonProcessingException
 import com.flipsidegroup.nmt.screen.app.map.audio.AudioPlayer
-import com.github.ajalt.timberkt.Timber
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hadilq.liveevent.LiveEvent
 import com.vibesoflove.db.DataBaseEntity
 import com.vibesoflove.model.*
 import com.vibesoflove.repository.repository.DataBaseRepository
 import com.vibesoflove.repository.repository.PixelRepository
-import com.vibesoflove.system.Resource
-import com.vibesoflove.system.Status
 import com.vibesoflove.ui.mix.MyMixContainer
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -31,7 +26,7 @@ class HomeViewModel @Inject constructor(
 
     val baseList = MutableStateFlow<List<AudioFirebaseModel>>(emptyList())
     val content = MutableLiveData<List<ContentModel>>()
-    val categoryList = MutableLiveData<List<CategoryModel>>()
+    private val categoryList = MutableLiveData<List<CategoryModel>>()
     val openVideoFragment = LiveEvent<VideoFile>()
 
     private val popularVideo = MutableStateFlow<List<VideoPopular>>(emptyList())
@@ -125,10 +120,4 @@ data class PopularContent(
         val audio: List<AudioFirebaseModel>,
         val savedList: List<DataBaseEntity>
 )
-
-data class Content(
-        val contentModel: ContentModel,
-        val isChoose: Boolean
-)
-
 

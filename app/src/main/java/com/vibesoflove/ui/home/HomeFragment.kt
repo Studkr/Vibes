@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.flipsidegroup.nmt.di.viewmodel.ViewModelFactory
 import com.flipsidegroup.nmt.screen.app.map.audio.AudioPlayer
-import com.github.ajalt.timberkt.Timber
 import com.vibesoflove.R
 import com.vibesoflove.system.BaseFragment
 import com.vibesoflove.ui.home.adapter.RoomController
