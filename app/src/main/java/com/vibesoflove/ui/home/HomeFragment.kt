@@ -31,6 +31,7 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
     private val contentAdapter = RoomController({
         viewModel.openCategory(it)
     }, {
+        viewModel.photoClicked(it)
 
     }, {
 
@@ -70,6 +71,10 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
 
         observe(viewModel.isPlaying){
            audioPlayerView.isVisible = it
+        }
+
+        observe(viewModel.photoChoose) {
+            parentFragment?.findNavController()?.navigate(R.id.toPhotoFragment, bundleOf("data" to it.current, "photoMass" to it.array))
         }
 
         observe(viewModel.errorMessage){

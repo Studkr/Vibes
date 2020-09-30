@@ -10,6 +10,7 @@ import com.vibesoflove.ui.content.audio.AudioContentModule
 import com.vibesoflove.ui.home.HomeFragmentModule
 import com.vibesoflove.ui.home.category_details.FragmentDetailsCategoryModule
 import com.vibesoflove.ui.home.deatils.FragmentCategoryModule
+import com.vibesoflove.ui.home.photo.PhotoFragmentModule
 import com.vibesoflove.ui.home.video.FragmentVIdeoPlayerModule
 import com.vibesoflove.ui.mix.MyMixFragmentModule
 import com.vibesoflove.ui.mix.item.ItemMixModule
@@ -37,7 +38,8 @@ interface MainActivityModule {
         VideoMixFragmentModule::class,
         AudioContentModule::class,
         AudioItemModule::class,
-        CategoryContainerModule::class
+        CategoryContainerModule::class,
+        PhotoFragmentModule::class
     ])
     fun activity(): MainActivity
 }

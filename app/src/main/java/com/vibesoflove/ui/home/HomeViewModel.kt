@@ -36,6 +36,7 @@ class HomeViewModel @Inject constructor(
     val openAudioPlayer = LiveEvent<String>()
     val openMyMix = LiveEvent<String>()
     val openContent = LiveEvent<String>()
+    val photoChoose = LiveEvent<ChoosePhoto>()
 
     val isPlaying = audioPlayer._isPlaying
 
@@ -112,6 +113,15 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+
+    fun photoClicked(photo: Photo) {
+        photoChoose.value =  ChoosePhoto(
+                photo.id,
+                popularPhoto.value.map {
+                    it.id
+                }
+        )
+    }
 }
 
 data class PopularContent(
@@ -119,5 +129,10 @@ data class PopularContent(
         val photo: List<Photo>,
         val audio: List<AudioFirebaseModel>,
         val savedList: List<DataBaseEntity>
+)
+
+data class ChoosePhoto(
+        val current: Long,
+        val array: List<Long>
 )
 
