@@ -20,6 +20,10 @@ abstract class ContentEpoxyModel : EpoxyModelWithHolder<ContentEpoxyModel.Holder
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     var starListener: View.OnClickListener? = null
 
+
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    var openContent: View.OnClickListener? = null
+
     override fun bind(holder: Holder) {
         with(holder) {
             imageContent.loadImageCrop(model.placeholder)
@@ -29,12 +33,14 @@ abstract class ContentEpoxyModel : EpoxyModelWithHolder<ContentEpoxyModel.Holder
                 saveButton.setImageResource(R.drawable.ic_save)
             }
             saveButton.setOnClickListener(starListener)
+            imageContent.setOnClickListener(openContent)
         }
     }
 
     override fun unbind(holder: Holder) {
         with(holder) {
             saveButton.setOnClickListener(null)
+            imageContent.setOnClickListener(null)
         }
     }
 

@@ -1,15 +1,15 @@
 package com.vibesoflove.ui.content.item
 
 import androidx.lifecycle.*
+import com.github.ajalt.timberkt.Timber
 import com.google.firebase.firestore.FirebaseFirestore
+import com.hadilq.liveevent.LiveEvent
 import com.vibesoflove.db.PhotoEntity
 import com.vibesoflove.db.VideoEntity
-import com.vibesoflove.model.CategoryFirebaseModel
-import com.vibesoflove.model.Photo
-import com.vibesoflove.model.Video
-import com.vibesoflove.model.VideoPopular
+import com.vibesoflove.model.*
 import com.vibesoflove.repository.repository.DataBaseRepository
 import com.vibesoflove.repository.repository.PixelRepository
+import com.vibesoflove.ui.home.ChoosePhoto
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,6 +25,8 @@ class ContentViewModel @Inject constructor(
     private val popularPhoto = MutableStateFlow<List<Photo>>(emptyList())
     private val savedPhoto = dataBaseRepo.getSavedPhoto()
     val firebaseCategory = MutableLiveData<List<CategoryFirebaseModel>>()
+    val openPhotoContent = LiveEvent<ChoosePhoto>()
+    val openVideoContent = LiveEvent<VideoFile>()
 
     init {
         firestore.collection("relax").get().addOnSuccessListener {
@@ -99,6 +101,25 @@ class ContentViewModel @Inject constructor(
                 }
 
 
+            }
+
+        }
+    }
+
+    fun openContent(model: ContentModel) {
+
+        if(model.type == "Photo"){
+            openPhotoContent.value = currentPopularPhoto.value?.map {it.id}?.let {
+                ChoosePhoto(
+                        model.id,
+                        it
+                )
+            }
+        }else{
+            popularVideo.value.map {
+                if(it.id == model.id){
+                  openVideoContent.value = it.videoFiles.find { it.quality.name == "HD" }
+                }
             }
 
         }
