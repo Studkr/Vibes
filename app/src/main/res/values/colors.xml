@@ -16,4 +16,5 @@
     <color name="text_blue_color">#7CB0FF</color>
     <color name="audio_text_color">#E60E3746</color>
     <color name="audio_duration_color">#2A363B</color>
+    <color name="header_text_color">#2A363B</color>
 </resources>

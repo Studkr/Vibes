@@ -37,10 +37,16 @@ class HomeViewModel @Inject constructor(
     val openMyMix = LiveEvent<String>()
     val openContent = LiveEvent<String>()
     val photoChoose = LiveEvent<ChoosePhoto>()
+    val openPixels = LiveEvent<String>()
 
     val isPlaying = audioPlayer._isPlaying
 
+
     private val savedList = MutableStateFlow<List<DataBaseEntity>>(emptyList())
+    private val savedCategory = MutableStateFlow<List<Readymix>>(emptyList())
+    val savedMix = savedList.combine(savedCategory){db, firebase->
+
+    }
 
     val errorMessage = LiveEvent<String>()
 
@@ -62,6 +68,11 @@ class HomeViewModel @Inject constructor(
                     errorMessage.value = "Please check internet? and reran application"
                 }
             }
+
+            firestore.collection("ready_mix").get()
+                    .addOnSuccessListener {
+                        savedCategory.value = it.toObjects(Readymix::class.java)
+                    }
 
             firestore.collection("music").get()
                     .addOnSuccessListener {
@@ -121,6 +132,10 @@ class HomeViewModel @Inject constructor(
                     it.id
                 }
         )
+    }
+
+    fun logoClicked() {
+        openPixels.value = "https://www.pexels.com"
     }
 }
 

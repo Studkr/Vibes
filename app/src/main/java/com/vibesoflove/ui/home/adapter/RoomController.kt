@@ -18,34 +18,7 @@ class RoomController(
 
     override fun buildModels(data: PopularContent) {
 
-        header {
-            id("MyMix")
-            name("My Mix")
-            starListener { model, parentView, clickedView, position ->
-                myMixClicked(model.name)
-            }
-        }
-        if(data.savedList.isNotEmpty()){
-            carousel {
-                id("myMix")
-                hasFixedSize(true)
-                numViewsToShowOnScreen(1f)
-                models(data.savedList.mapIndexed {index, model ->
-                    MyMixModel_()
-                            .id(index)
-                            .model(model)
-                            .starListener { model, parentView, clickedView, position ->  }
-                })
-            }
-        }else{
-            emptyMixController {
-                id("EmptyMix")
-                model(R.color.add_mix_color)
-                starListener { model, parentView, clickedView, position ->
 
-                }
-            }
-        }
 
         header {
             id("VideoTitle")

@@ -1,11 +1,7 @@
 package com.vibesoflove.ui.home.photo.photoitem
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.flipsidegroup.nmt.di.viewmodel.ViewModelFactory
 import com.flipsidegroup.nmt.system.loadImageCrop

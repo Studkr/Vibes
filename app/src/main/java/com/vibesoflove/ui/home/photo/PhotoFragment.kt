@@ -35,6 +35,8 @@ class PhotoFragment : BaseFragment(R.layout.fragment_photo) {
             parentFragment?.childFragmentManager?.popBackStack()
         }
 
+        photoViewPager.setPageTransformer(FadeOutTransformation())
+
         photoViewPager.post {
             val page = photoMass.indexOf(data)
             photoViewPager.currentItem = page

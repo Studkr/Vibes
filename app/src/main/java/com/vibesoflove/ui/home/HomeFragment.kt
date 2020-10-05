@@ -7,16 +7,22 @@ import android.view.View
 import android.view.WindowManager
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.flipsidegroup.nmt.di.viewmodel.ViewModelFactory
 import com.flipsidegroup.nmt.screen.app.map.audio.AudioPlayer
+import com.github.ajalt.timberkt.Timber
 import com.vibesoflove.R
 import com.vibesoflove.system.BaseFragment
+import com.vibesoflove.system.showChromeTab
 import com.vibesoflove.ui.home.adapter.RoomController
+import com.vibesoflove.ui.home.homeItem.HomeItemFragment
 import kotlinx.android.synthetic.main.home_fragment.*
 import pro.shineapp.rentout.system.ext.observe
 import javax.inject.Inject
+import kotlin.system.exitProcess
 
 class HomeFragment : BaseFragment(R.layout.home_fragment) {
 
@@ -50,6 +56,25 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         roomView.adapter = contentAdapter.adapter
 
         audioPlayerView.player = audioPlayer.exoPlayer
+
+        pixelImage.setOnClickListener {
+            viewModel.logoClicked()
+        }
+
+        observe(viewModel.savedMix){
+
+            mixViewPager.adapter = object :FragmentStateAdapter(this){
+                override fun getItemCount(): Int = it.size
+
+                override fun createFragment(position: Int): Fragment  = HomeItemFragment().apply {
+                    this.arguments = bundleOf(
+                            "data" to it.get(position)
+                    )
+                }
+
+            }
+
+        }
 
         observe(viewModel.contentCategory) {
             contentAdapter.setData(it)
@@ -86,7 +111,7 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
                     .setPositiveButton("Ok") {
                         dialog, id ->
                         dialog.cancel()
-                        System.exit(0)
+                        exitProcess(0)
                     }
                     .setNegativeButton("Retry"){ dialog, id ->
                         viewModel.updateData()
@@ -99,6 +124,10 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
 
         observe(viewModel.openContent) {
             parentFragment?.findNavController()?.navigate(R.id.toContentFragment, bundleOf("data" to it))
+        }
+
+        observe(viewModel.openPixels){
+            showChromeTab(it)
         }
     }
 

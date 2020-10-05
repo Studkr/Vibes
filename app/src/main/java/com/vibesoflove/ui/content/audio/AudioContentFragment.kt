@@ -1,5 +1,7 @@
 package com.vibesoflove.ui.content.audio
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -10,6 +12,7 @@ import com.flipsidegroup.nmt.di.viewmodel.ViewModelFactory
 import com.flipsidegroup.nmt.screen.app.map.audio.AudioPlayer
 import com.flipsidegroup.nmt.system.loadImageCrop
 import com.github.ajalt.timberkt.Timber
+import com.google.android.exoplayer2.offline.DownloadService.startForeground
 
 import com.vibesoflove.R
 import com.vibesoflove.contentAudio
@@ -51,10 +54,14 @@ class AudioContentFragment : BaseFragment(R.layout.audio_content_fragment) {
         }
 
         observe(viewModel.isPlaying){
-            if (it) {
+           if (it) {
                 GlobalScope.launch {
                     withContext(Dispatchers.IO){
-                        AudioService.startService(requireContext(), "start")
+                        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.O) {
+
+                        }else{
+                            AudioService.startService(requireContext(), "start")
+                        }
                     }
                 }
             }

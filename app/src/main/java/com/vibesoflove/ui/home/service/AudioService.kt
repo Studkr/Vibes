@@ -55,7 +55,7 @@ class AudioService : DaggerService() {
                     player: Player,
                     callback: PlayerNotificationManager.BitmapCallback
             ): Bitmap? {
-                return BitmapFactory.decodeResource(resources, R.drawable.logo)
+                return BitmapFactory.decodeResource(resources, R.drawable.ic_save)
             }
 
         }
@@ -86,7 +86,7 @@ class AudioService : DaggerService() {
             setUseNavigationActionsInCompactView(true)
             setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             setPlayer(audioPlayer.exoPlayer)
-            setSmallIcon(R.drawable.logo)
+            setSmallIcon(R.drawable.ic_save)
         }
     }
 }
